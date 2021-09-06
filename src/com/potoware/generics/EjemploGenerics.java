@@ -30,6 +30,10 @@ public class EjemploGenerics {
 
         List<ClientePremium> clientePremiumList = fromArrayToList(new ClientePremium[]{new ClientePremium("Nora","Ver")});
 
+
+        imprimirClientes(clientes);
+        imprimirClientes(clientes2);
+        imprimirClientes(clientePremiumList);
     }
 //Parametros genericos en objetos
     public static <T extends Number> List<T> fromArrayToList(T[] c){
@@ -49,5 +53,9 @@ public class EjemploGenerics {
 
     public static <T> List<T> fromArrayToList(T[] c){
         return Arrays.asList(c);
+    }
+
+    public static void imprimirClientes(List<? extends Cliente> clientes){
+        clientes.forEach(System.out::println);
     }
 }
