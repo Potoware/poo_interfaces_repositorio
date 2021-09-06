@@ -4,11 +4,11 @@ import com.potoware.poointerfaces.modelo.Cliente;
 
 import java.util.List;
 
-public interface ICrudRepositorio {
+public interface ICrudRepositorio<T> {
 
-    List<Cliente> listar();
+    List<T> listar();
     Cliente porId(Integer id);
-    void crear(Cliente cliente);
-    void editar(Cliente cliente);
+    void crear(T cliente);
+    void editar(T cliente);
     void eliminar(Integer integer);
 }

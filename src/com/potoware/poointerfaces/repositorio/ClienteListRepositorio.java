@@ -3,21 +3,10 @@ package com.potoware.poointerfaces.repositorio;
 import com.potoware.poointerfaces.modelo.Cliente;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
-public class ClienteListRepositorio implements IOrdenablePaginableCrudRepositorio{
+public class ClienteListRepositorio extends AbstractaListRepositorio<Cliente>{
 
-    private List<Cliente> datasource;
-
-    public ClienteListRepositorio() {
-        this.datasource = new ArrayList<>();
-    }
-
-    @Override
-    public List<Cliente> listar() {
-        return datasource;
-    }
 
     @Override
     public Cliente porId(Integer id) {
@@ -33,20 +22,10 @@ public class ClienteListRepositorio implements IOrdenablePaginableCrudRepositori
     }
 
     @Override
-    public void crear(Cliente cliente) {
-        this.datasource.add(cliente);
-    }
-
-    @Override
     public void editar(Cliente cliente) {
         Cliente c = this.porId(cliente.getId());
         c.setNombre(cliente.getNombre());
         c.setApellidos(cliente.getApellidos());
-    }
-
-    @Override
-    public void eliminar(Integer integer) {
-        this.datasource.remove(this.porId(integer));
     }
 
     //ORDENAR ARRAYLIST
@@ -66,12 +45,7 @@ public class ClienteListRepositorio implements IOrdenablePaginableCrudRepositori
         return listaOrdenada;
     }
 
-    @Override
-    public List<Cliente> listar(int desde, int hasta) {
-        return datasource.subList(desde,hasta);
-    }
-
-    private int ordenar(Cliente a, Cliente b,String campo){
+    private int ordenar(Cliente a, Cliente b, String campo){
         int resultado =0;
         switch (campo){
             case "id" ->
@@ -85,8 +59,4 @@ public class ClienteListRepositorio implements IOrdenablePaginableCrudRepositori
 
     }
 
-    @Override
-    public int total() {
-        return this.datasource.size();
-    }
 }

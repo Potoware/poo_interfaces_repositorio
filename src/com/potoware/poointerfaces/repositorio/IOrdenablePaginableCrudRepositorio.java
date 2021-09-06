@@ -1,5 +1,5 @@
 package com.potoware.poointerfaces.repositorio;
 
-public interface IOrdenablePaginableCrudRepositorio extends IOrdenableRepositorio, PaginableRepositorio,ICrudRepositorio, IContableRepositorio {
+public interface IOrdenablePaginableCrudRepositorio<T> extends IOrdenableRepositorio<T>, PaginableRepositorio<T>,ICrudRepositorio<T>, IContableRepositorio {
 
 }

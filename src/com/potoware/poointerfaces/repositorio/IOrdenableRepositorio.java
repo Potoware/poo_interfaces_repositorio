@@ -4,9 +4,9 @@ import com.potoware.poointerfaces.modelo.Cliente;
 
 import java.util.List;
 
-public interface IOrdenableRepositorio {
+public interface IOrdenableRepositorio<T> {
 
-    List<Cliente> listar(String campo,Direccion dir);
+    List<T> listar(String campo,Direccion dir);
 
 
 

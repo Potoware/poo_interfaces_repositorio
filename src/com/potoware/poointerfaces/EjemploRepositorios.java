@@ -7,7 +7,7 @@ import java.util.List;
 
 public class EjemploRepositorios {
     public static void main(String[] args) {
-        IOrdenablePaginableCrudRepositorio repo = new ClienteListRepositorio();
+        IOrdenablePaginableCrudRepositorio<Cliente> repo = new ClienteListRepositorio();
         repo.crear(new Cliente("Juan",  "Camacho"));
         repo.crear(new Cliente("Luci", "Martinez"));
         repo.crear(new Cliente("Alejandro", "Potosi"));
