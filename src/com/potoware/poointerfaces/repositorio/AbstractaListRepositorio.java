@@ -1,11 +1,13 @@
 package com.potoware.poointerfaces.repositorio;
 
 
+import com.potoware.poointerfaces.modelo.BaseEntity;
+
 import java.util.ArrayList;
 
 import java.util.List;
 
-public abstract class AbstractaListRepositorio<T> implements IOrdenablePaginableCrudRepositorio<T>{
+public abstract class AbstractaListRepositorio<T extends BaseEntity> implements IOrdenablePaginableCrudRepositorio<T>{
 
     protected List<T> datasource;
 
@@ -18,18 +20,18 @@ public abstract class AbstractaListRepositorio<T> implements IOrdenablePaginable
         return datasource;
     }
 
-    /*@Override
-    public Cliente porId(Integer id) {
-        Cliente resultado = null;
+    @Override
+    public T porId(Integer id) {
+        T resultado = null;
 
-        for(Cliente cli: datasource){
+        for(T cli: datasource){
             if(cli.getId() != null &&cli.getId().equals(id)){
                 resultado = cli;
                 break;
             }
         }
         return resultado;
-    }*/
+    }
 
     @Override
     public void crear(T t) {
