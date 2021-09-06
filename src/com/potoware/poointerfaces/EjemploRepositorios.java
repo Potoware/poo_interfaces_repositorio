@@ -3,6 +3,7 @@ package com.potoware.poointerfaces;
 import com.potoware.excepciones.AccesoDatosException;
 import com.potoware.excepciones.EscrituraAccesoDatosException;
 import com.potoware.excepciones.LecturaAccesoDatoException;
+import com.potoware.excepciones.RegistroDuplicadoAccesoDatosException;
 import com.potoware.poointerfaces.modelo.Cliente;
 import com.potoware.poointerfaces.repositorio.*;
 import com.potoware.poointerfaces.repositorio.lista.ClienteListRepositorio;
@@ -18,7 +19,10 @@ public class EjemploRepositorios {
             repo.crear(new Cliente("Alejandro", "Potosi"));
             repo.crear(new Cliente("Astrid", "Juliana"));
             repo.crear(new Cliente("Andres", "Alvarado"));
-            repo.crear(null);
+            Cliente andres = new Cliente("Andres", "Potoware");
+            repo.crear(andres);
+            repo.crear(andres);
+            //repo.crear(null);
             System.out.println("===== LISTAR ======");
             //Listar los datos del arraylist
             List<Cliente> clientes = repo.listar();
@@ -41,12 +45,19 @@ public class EjemploRepositorios {
             List<Cliente> clientesOrdenAsc2 = repo.listar("apellido", Direccion.ASC);
             clientesOrdenAsc2.forEach(coa -> System.out.println(coa));
             System.out.println("===== ELIMINAR ======");
-            repo.eliminar(10);
+            repo.eliminar(1);
             repo.listar().forEach(System.out::println);
 
             System.out.println("===== Total ======");
             System.out.println("Total Registros: " + repo.total());
-        } catch (EscrituraAccesoDatosException eae) {
+        }catch (RegistroDuplicadoAccesoDatosException rdae){
+            System.out.println("Dupliucado = " + rdae.getMessage());
+            rdae.printStackTrace();
+
+
+        }
+
+        catch (EscrituraAccesoDatosException eae) {
             System.out.println("eae.getMessage() = " + eae.getMessage());
             eae.printStackTrace();
 

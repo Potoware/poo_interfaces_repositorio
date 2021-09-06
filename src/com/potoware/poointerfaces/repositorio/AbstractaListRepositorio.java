@@ -3,6 +3,7 @@ package com.potoware.poointerfaces.repositorio;
 
 import com.potoware.excepciones.EscrituraAccesoDatosException;
 import com.potoware.excepciones.LecturaAccesoDatoException;
+import com.potoware.excepciones.RegistroDuplicadoAccesoDatosException;
 import com.potoware.poointerfaces.modelo.BaseEntity;
 
 import java.util.ArrayList;
@@ -47,6 +48,10 @@ public abstract class AbstractaListRepositorio<T extends BaseEntity> implements 
 
         if(t==null){
             throw new EscrituraAccesoDatosException("Error el crear objeto vacio");
+        }
+        if(this.datasource.contains(t)){
+            throw new RegistroDuplicadoAccesoDatosException("Error con el objeto " +t.getId()+
+                    "YA existe en el repositorio");
         }
         this.datasource.add(t);
     }
