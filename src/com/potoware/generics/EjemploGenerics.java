@@ -34,6 +34,11 @@ public class EjemploGenerics {
         imprimirClientes(clientes);
         imprimirClientes(clientes2);
         imprimirClientes(clientePremiumList);
+
+
+        System.out.println("Mamimo de 1,9,4 es: " + maximo(1,9,4));
+        System.out.println("Mamimo de 7,74.2,499 es: " + maximo(7.74,4.99,4.78));
+        System.out.println("Mamimo de Naranja, Mnazana, Pera es: " + maximo("Manzana","Naranja","Pera"));
     }
 //Parametros genericos en objetos
     public static <T extends Number> List<T> fromArrayToList(T[] c){
@@ -57,5 +62,16 @@ public class EjemploGenerics {
 
     public static void imprimirClientes(List<? extends Cliente> clientes){
         clientes.forEach(System.out::println);
+    }
+
+    public static <T extends Comparable<T>> T maximo(T a, T b, T c){
+        T max =a;
+        if(b.compareTo(max)>0){
+            max = b;
+        }
+        if(c.compareTo(max) >0){
+            max =c;
+        }
+        return max;
     }
 }
