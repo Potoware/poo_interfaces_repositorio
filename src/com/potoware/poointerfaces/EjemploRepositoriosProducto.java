@@ -1,5 +1,7 @@
 package com.potoware.poointerfaces;
 
+import com.potoware.excepciones.AccesoDatosException;
+import com.potoware.excepciones.LecturaAccesoDatoException;
 import com.potoware.poointerfaces.modelo.Cliente;
 import com.potoware.poointerfaces.modelo.Producto;
 import com.potoware.poointerfaces.repositorio.Direccion;
@@ -11,6 +13,8 @@ import java.util.List;
 
 public class EjemploRepositoriosProducto {
     public static void main(String[] args) {
+
+        try {
         IOrdenablePaginableCrudRepositorio<Producto> repo = new ProductoListRepositorio();
         repo.crear(new Producto("Mesa",  50.50));
         repo.crear(new Producto("Silla", 120.00));
@@ -44,6 +48,13 @@ public class EjemploRepositoriosProducto {
 
         System.out.println("===== Total ======");
         System.out.println("Total Registros: " + repo.total());
+        }catch (LecturaAccesoDatoException e){
+            System.out.println("e.getMessage() = " + e.getMessage());
+            e.printStackTrace(System.out);
+        }catch (AccesoDatosException ae){
+            System.out.println("ae.getMessage() = " + ae.getMessage());
+            ae.printStackTrace(System.out);
+        }
 
     }
 }

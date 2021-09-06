@@ -1,5 +1,6 @@
 package com.potoware.poointerfaces.repositorio.lista;
 
+import com.potoware.excepciones.LecturaAccesoDatoException;
 import com.potoware.poointerfaces.modelo.Cliente;
 import com.potoware.poointerfaces.modelo.Producto;
 import com.potoware.poointerfaces.repositorio.AbstractaListRepositorio;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class ProductoListRepositorio extends AbstractaListRepositorio<Producto> {
     @Override
-    public void editar(Producto producto) {
+    public void editar(Producto producto) throws LecturaAccesoDatoException {
         Producto p = porId(producto.getId());
         p.setDescripcion(producto.getDescripcion());
         p.setPrecio(producto.getPrecio());

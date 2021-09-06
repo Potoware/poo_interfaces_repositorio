@@ -1,5 +1,6 @@
 package com.potoware.poointerfaces.repositorio.lista;
 
+import com.potoware.excepciones.LecturaAccesoDatoException;
 import com.potoware.poointerfaces.modelo.Cliente;
 import com.potoware.poointerfaces.repositorio.AbstractaListRepositorio;
 import com.potoware.poointerfaces.repositorio.Direccion;
@@ -11,7 +12,7 @@ public class ClienteListRepositorio extends AbstractaListRepositorio<Cliente> {
 
 
     @Override
-    public void editar(Cliente cliente) {
+    public void editar(Cliente cliente) throws LecturaAccesoDatoException {
         Cliente c = this.porId(cliente.getId());
         c.setNombre(cliente.getNombre());
         c.setApellidos(cliente.getApellidos());

@@ -1,6 +1,8 @@
 package com.potoware.poointerfaces.repositorio;
 
 
+import com.potoware.excepciones.EscrituraAccesoDatosException;
+import com.potoware.excepciones.LecturaAccesoDatoException;
 import com.potoware.poointerfaces.modelo.BaseEntity;
 
 import java.util.ArrayList;
@@ -21,7 +23,11 @@ public abstract class AbstractaListRepositorio<T extends BaseEntity> implements 
     }
 
     @Override
-    public T porId(Integer id) {
+    public T porId(Integer id) throws LecturaAccesoDatoException {
+        if(id == null || id<=0){
+            throw new LecturaAccesoDatoException("Id Invalido, debe ser mayor que 0");
+        }
+
         T resultado = null;
 
         for(T cli: datasource){
@@ -30,17 +36,24 @@ public abstract class AbstractaListRepositorio<T extends BaseEntity> implements 
                 break;
             }
         }
+        if(resultado==null){
+            throw new LecturaAccesoDatoException("No existe el registro con el id" +id);
+        }
         return resultado;
     }
 
     @Override
-    public void crear(T t) {
+    public void crear(T t) throws EscrituraAccesoDatosException {
+
+        if(t==null){
+            throw new EscrituraAccesoDatosException("Error el crear objeto vacio");
+        }
         this.datasource.add(t);
     }
 
 
     @Override
-    public void eliminar(Integer integer) {
+    public void eliminar(Integer integer) throws LecturaAccesoDatoException {
         this.datasource.remove(this.porId(integer));
     }
 
