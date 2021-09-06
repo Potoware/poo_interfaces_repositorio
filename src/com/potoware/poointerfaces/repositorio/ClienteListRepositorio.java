@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class ClienteListRepositorio implements ICrudRepositorio, IOrdenableRepositorio, PaginableRepositorio{
+public class ClienteListRepositorio implements IOrdenablePaginableCrudRepositorio{
 
     private List<Cliente> datasource;
 
@@ -85,5 +85,8 @@ public class ClienteListRepositorio implements ICrudRepositorio, IOrdenableRepos
 
     }
 
+    @Override
+    public int total() {
+        return this.datasource.size();
+    }
 }
-

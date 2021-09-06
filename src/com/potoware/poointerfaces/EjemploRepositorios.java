@@ -7,7 +7,7 @@ import java.util.List;
 
 public class EjemploRepositorios {
     public static void main(String[] args) {
-        ICrudRepositorio repo = new ClienteListRepositorio();
+        IOrdenablePaginableCrudRepositorio repo = new ClienteListRepositorio();
         repo.crear(new Cliente("Juan",  "Camacho"));
         repo.crear(new Cliente("Luci", "Martinez"));
         repo.crear(new Cliente("Alejandro", "Potosi"));
@@ -18,11 +18,11 @@ public class EjemploRepositorios {
         List<Cliente> clientes = repo.listar();
         clientes.forEach(c-> System.out.println(c));
         System.out.println("===== PAGINAR ======");
-        List<Cliente> paginable = ((PaginableRepositorio)repo).listar(1,2);
+        List<Cliente> paginable = repo.listar(1,2);
         paginable.forEach(p-> System.out.println(p));
 
         System.out.println("===== ORDENAR ======");
-        List<Cliente> clienteOrdenAsc =((IOrdenableRepositorio)repo).listar("apellido", Direccion.DESC);
+        List<Cliente> clienteOrdenAsc =repo.listar("apellido", Direccion.DESC);
         clienteOrdenAsc.forEach(coa-> System.out.println(coa));
 
         System.out.println("===== EDITAR ======");
@@ -32,11 +32,14 @@ public class EjemploRepositorios {
         Cliente ph = repo.porId(2);
         System.out.println(ph);
 
-        List<Cliente> clientesOrdenAsc2 = ((IOrdenableRepositorio)repo).listar("apellido",Direccion.ASC);
+        List<Cliente> clientesOrdenAsc2 = repo.listar("apellido",Direccion.ASC);
         clientesOrdenAsc2.forEach(coa-> System.out.println(coa));
         System.out.println("===== ELIMINAR ======");
         repo.eliminar(2);
         repo.listar().forEach(System.out::println);
+
+        System.out.println("===== Total ======");
+        System.out.println("Total Registros: " + repo.total());
 
     }
 }
