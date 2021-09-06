@@ -3,6 +3,7 @@ package com.potoware.poointerfaces.repositorio;
 import com.potoware.poointerfaces.modelo.Cliente;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class ClienteListRepositorio implements ICrudRepositorio, IOrdenableRepositorio, PaginableRepositorio{
@@ -48,13 +49,42 @@ public class ClienteListRepositorio implements ICrudRepositorio, IOrdenableRepos
         this.datasource.remove(this.porId(integer));
     }
 
+    //ORDENAR ARRAYLIST
     @Override
     public List<Cliente> listar(String campo, Direccion dir) {
-        return null;
+
+       datasource.sort(new Comparator<Cliente>() {
+           @Override
+           public int compare(Cliente a, Cliente b) {
+               int resultado = 0;
+               if(dir == Direccion.ASC){
+                   switch (campo){
+                       case "id" ->
+                               resultado = a.getId().compareTo(b.getId());
+                       case "nombre" ->
+                               resultado = a.getNombre().compareTo(b.getNombre());
+                       case "apellido" ->
+                               resultado= a.getApellidos().compareTo(b.getApellidos());
+                   }
+               }else if (dir == Direccion.DESC){
+                   switch (campo){
+                       case "id" ->
+                               resultado = b.getId().compareTo(a.getId());
+                       case "nombre" ->
+                               resultado = b.getNombre().compareTo(a.getNombre());
+                       case "apellido" ->
+                               resultado= b.getApellidos().compareTo(a.getApellidos());
+                   }
+               }
+
+               return resultado;
+           }
+       });
+        return datasource;
     }
 
     @Override
     public List<Cliente> listar(int desde, int hasta) {
-        return null;
+        return datasource.subList(desde,hasta);
     }
 }
