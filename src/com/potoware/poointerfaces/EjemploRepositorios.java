@@ -2,6 +2,7 @@ package com.potoware.poointerfaces;
 
 import com.potoware.poointerfaces.modelo.Cliente;
 import com.potoware.poointerfaces.repositorio.*;
+import com.potoware.poointerfaces.repositorio.lista.ClienteListRepositorio;
 
 import java.util.List;
 

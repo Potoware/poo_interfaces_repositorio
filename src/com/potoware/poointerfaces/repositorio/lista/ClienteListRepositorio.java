@@ -1,11 +1,13 @@
-package com.potoware.poointerfaces.repositorio;
+package com.potoware.poointerfaces.repositorio.lista;
 
 import com.potoware.poointerfaces.modelo.Cliente;
+import com.potoware.poointerfaces.repositorio.AbstractaListRepositorio;
+import com.potoware.poointerfaces.repositorio.Direccion;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClienteListRepositorio extends AbstractaListRepositorio<Cliente>{
+public class ClienteListRepositorio extends AbstractaListRepositorio<Cliente> {
 
 
     @Override
