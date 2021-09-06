@@ -16,7 +16,7 @@ public class ClienteListRepositorio implements ICrudRepositorio, IOrdenableRepos
 
     @Override
     public List<Cliente> listar() {
-        return null;
+        return datasource;
     }
 
     @Override
@@ -24,7 +24,7 @@ public class ClienteListRepositorio implements ICrudRepositorio, IOrdenableRepos
         Cliente resultado = null;
 
         for(Cliente cli: datasource){
-            if(cli.getId().equals(id)){
+            if(cli.getId() != null &&cli.getId().equals(id)){
                 resultado = cli;
                 break;
             }
@@ -34,7 +34,7 @@ public class ClienteListRepositorio implements ICrudRepositorio, IOrdenableRepos
 
     @Override
     public void crear(Cliente cliente) {
-
+        this.datasource.add(cliente);
     }
 
     @Override
