@@ -52,39 +52,38 @@ public class ClienteListRepositorio implements ICrudRepositorio, IOrdenableRepos
     //ORDENAR ARRAYLIST
     @Override
     public List<Cliente> listar(String campo, Direccion dir) {
-
-       datasource.sort(new Comparator<Cliente>() {
-           @Override
-           public int compare(Cliente a, Cliente b) {
-               int resultado = 0;
-               if(dir == Direccion.ASC){
-                   switch (campo){
-                       case "id" ->
-                               resultado = a.getId().compareTo(b.getId());
-                       case "nombre" ->
-                               resultado = a.getNombre().compareTo(b.getNombre());
-                       case "apellido" ->
-                               resultado= a.getApellidos().compareTo(b.getApellidos());
-                   }
-               }else if (dir == Direccion.DESC){
-                   switch (campo){
-                       case "id" ->
-                               resultado = b.getId().compareTo(a.getId());
-                       case "nombre" ->
-                               resultado = b.getNombre().compareTo(a.getNombre());
-                       case "apellido" ->
-                               resultado= b.getApellidos().compareTo(a.getApellidos());
-                   }
-               }
-
-               return resultado;
+        List<Cliente> listaOrdenada = new ArrayList<>(this.datasource);
+       listaOrdenada.sort((a, b) -> {
+           int resultado = 0;
+           if(dir == Direccion.ASC){
+               resultado = this.ordenar(a,b, campo);
+           }else if (dir == Direccion.DESC){
+               resultado = this.ordenar(b,a, campo);
            }
+
+           return resultado;
        });
-        return datasource;
+        return listaOrdenada;
     }
 
     @Override
     public List<Cliente> listar(int desde, int hasta) {
         return datasource.subList(desde,hasta);
     }
+
+    private int ordenar(Cliente a, Cliente b,String campo){
+        int resultado =0;
+        switch (campo){
+            case "id" ->
+                    resultado = a.getId().compareTo(b.getId());
+            case "nombre" ->
+                    resultado = a.getNombre().compareTo(b.getNombre());
+            case "apellido" ->
+                    resultado= a.getApellidos().compareTo(b.getApellidos());
+        }
+        return resultado;
+
+    }
+
 }
+
