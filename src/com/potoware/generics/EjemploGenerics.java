@@ -1,6 +1,7 @@
 package com.potoware.generics;
 
 import com.potoware.poointerfaces.modelo.Cliente;
+import com.potoware.poointerfaces.modelo.ClientePremium;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,9 +28,15 @@ public class EjemploGenerics {
         List<String> nombres = fromArrayToList(new String[]{"Andres", "Pepe","Luci", "Jhon"}, enterosArreglo);
         nombres.forEach(System.out::println);
 
+        List<ClientePremium> clientePremiumList = fromArrayToList(new ClientePremium[]{new ClientePremium("Nora","Ver")});
+
     }
 //Parametros genericos en objetos
-    public static <T> List<T> fromArrayToList(T[] c){
+    public static <T extends Number> List<T> fromArrayToList(T[] c){
+        return Arrays.asList(c);
+    }
+
+    public static <T extends Cliente & Comparable> List<T> fromArrayToList(T[] c){
         return Arrays.asList(c);
     }
 
@@ -37,6 +44,10 @@ public class EjemploGenerics {
         for(G gIterator:g){
             System.out.println(gIterator);
         }
+        return Arrays.asList(c);
+    }
+
+    public static <T> List<T> fromArrayToList(T[] c){
         return Arrays.asList(c);
     }
 }
